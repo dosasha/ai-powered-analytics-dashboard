@@ -1,0 +1,35 @@
+{
+    "report_file_path": "RetailAnalysis.Report/report.json",
+    "page_name": "ReportSection1",
+    "objects": {
+        "filters": {
+            "YearMonth": {
+                "name": "Filter_YearMonth",
+                "table": "monthly_revenue",
+                "column": "YearMonth"
+            },
+            "Country": {
+                "name": "Filter_Country",
+                "table": "month_country_revenue",
+                "column": "Country"
+            }
+        },
+        "visuals": {
+            "title_textbox": {
+                "name": "VisualContainer_Title",
+                "type": "textbox",
+                "marker": "__DASHBOARD_TITLE__"
+            },
+            "slots": {
+                "slot_trend": {
+                    "name": "VisualContainer_Trend",
+                    "type": "lineChart"
+                },
+                "slot_top_countries": {
+                    "name": "VisualContainer_TopCountries",
+                    "type": "columnChart"
+                }
+            }
+        }
+    }
+}
