@@ -47,16 +47,37 @@ def main():
         print("Check your GOOGLE_API_KEY in .env and network connection.")
         return
 
-    # 6. Validate Spec
+    # 6. Validate Spec against Schema
     try:
-        print("\nValidating Spec against Schema and Allowed Values...")
+        print("\nValidating Spec structurally...")
         validated_spec = DashboardSpec(**raw_spec_dict)
-        print("Validation Successful!")
+        print("Structural Validation Successful!")
     except Exception as e:
         print(f"\nValidation Failed. The AI generated an invalid configuration:\n{e}")
         return
 
-    # 7. Run Builder
+    # 7. Explicit Pre-Flight Safety Checks (Commit 29)
+    print("\nPerforming explicit Pre-Flight Safety Checks...")
+    allowed_yms = metadata.get("allowed_yearmonths", [])
+    allowed_countries = metadata.get("allowed_countries", [])
+    
+    spec_yms = validated_spec.filters.YearMonth
+    spec_countries = validated_spec.filters.Country
+    
+    for ym in spec_yms:
+        if ym not in allowed_yms:
+            print(f"SAFETY CHECK FAILED: Requested YearMonth '{ym}' is NOT in the allowed list.")
+            print("Aborting dashboard build.")
+            return
+            
+    for c in spec_countries:
+        if c not in allowed_countries:
+            print(f"SAFETY CHECK FAILED: Requested Country '{c}' is NOT in the allowed list.")
+            print("Aborting dashboard build.")
+            return
+    print("Pre-Flight Safety Checks Passed. Requested values are grounded in available data.")
+
+    # 8. Run Builder
     try:
         print("\nStarting Dashboard Builder...")
         # Pass the validated dictionary back to the builder
