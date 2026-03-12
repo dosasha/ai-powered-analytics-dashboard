@@ -61,15 +61,5 @@ class DashboardSpec(BaseModel):
         
         return self
 
-if __name__ == "__main__":
-    # Test valid
-    try:
-        spec = DashboardSpec(
-            dashboard_title="Test Dashboard",
-            filters={"YearMonth": ["2011-01"], "Country": []},
-            visuals_config={"slot_trend": {"visible": True}}
-        )
-        print("Valid Spec validated successfully.")
-    except Exception as e:
-        print(f"Validation failed as expected? {e}")
+
 

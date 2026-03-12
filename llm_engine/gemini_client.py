@@ -62,11 +62,4 @@ class GeminiClient:
              print(f"Gemini API Error: {e}")
              raise
 
-if __name__ == "__main__":
-    # Simple self-test (requires valid GOOGLE_API_KEY)
-    print("Testing GeminiClient initialization...")
-    try:
-        client = GeminiClient()
-        print("Initialization successful. (Actual API call skipped in test run).")
-    except ValueError as e:
-        print(f"Cannot fully test without API key: {e}")
+

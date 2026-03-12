@@ -148,19 +148,4 @@ class DashboardBuilder:
         print("Modifications saved successfully.")
         return self.output_dir
 
-if __name__ == "__main__":
-    # Test Execution
-    try:
-        from dashboard_spec import DashboardSpec
-        # Using the spec schema directly to ensure it matches
-        spec = DashboardSpec(
-            dashboard_title="Focus on March 2011",
-            filters={"YearMonth": ["2011-03"], "Country": ["France"]},
-            visuals_config={}
-        )
-        print("Initializing Builder with Spec...")
-        builder = DashboardBuilder(spec.dict())
-        output_path = builder.generate()
-        print(f"\nSuccess! Output saved to: {output_path}")
-    except Exception as e:
-        print(f"Error during execution: {e}")
+
